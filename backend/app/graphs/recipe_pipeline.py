@@ -43,13 +43,20 @@ async def run_recipe_pipeline(
     raw_input: str,
     input_type: str,
     user_id: str,
-    image_bytes: bytes = None
+    image_bytes: bytes = None,
+    low_sodium_mode: bool = False,
+    user_sodium_limit_mg: int = None
 ) -> RecipePipelineState:
     initial_state = {
         "raw_input": raw_input,
         "input_type": input_type,
         "user_id": user_id,
         "image_bytes": image_bytes,
+        "low_sodium_mode": low_sodium_mode,
+        "user_sodium_limit_mg": user_sodium_limit_mg,
+        "sodium_limit_source": None,
+        "low_sodium_warning": None,
+        "herb_suggestions": None,
         "errors": [],
         "pipeline_stage": "starting",
         "parsed_recipe": None,

@@ -3,7 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
 from app.api.router import api_router
 
-app = FastAPI(title="salt-to-taste", version="0.1.0")
+app = FastAPI(
+    title="Salt to Taste",
+    description="Backend API for the Salt to Taste platform",
+    version="1.0.0",
+    debug=True
+)
 
 app.include_router(api_router, prefix="/api/v1")
 

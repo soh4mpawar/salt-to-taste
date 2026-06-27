@@ -9,7 +9,7 @@ def test_build_vw_features():
     assert "dish_type=soup" in feat
     assert "|method" in feat
     assert "cooking_method=simmer" in feat
-    assert "baseline_normalized=5.0" in feat
+    assert "baseline_norm=5.0" in feat
 
 @pytest.mark.asyncio
 async def test_get_palate_adjustment_no_model():
@@ -23,4 +23,4 @@ async def test_get_palate_adjustment_no_model():
             servings=4,
             model_manager=manager
         )
-        assert adj == 1.0
+        assert adj == (1.0, 2)

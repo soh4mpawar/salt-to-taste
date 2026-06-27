@@ -15,14 +15,23 @@ class RecommendationRead(BaseModel):
     sodium_mg_per_serving: float
     recommendation_context: dict[str, Any] | None = None
     created_at: datetime
+    low_sodium_warning: str | None = None
+    herb_suggestions: list[str] | None = None
 
 class SaltySwapRequest(BaseModel):
     model_config = ConfigDict(from_attributes=True)
-    recipe_id: UUID
-    ingredient_name: str
-    sodium_mg: float
+    recommendation_id: UUID
+    ingredient_name: str      # e.g. "soy sauce"
+    amount: float             # quantity added
+    unit: str                 # "tbsp", "tsp", "ml", "g"
 
 class SaltySwapResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
+    ingredient_name: str
+    added_sodium_mg: float
+    equivalent_salt_grams: float
+    original_recommendation_grams: float
     adjusted_grams: float
-    explanation: str
+    adjustment_applied: bool
+    recommendation: str
+    warning: str | None = None

@@ -11,6 +11,8 @@ class RecipeCreate(BaseModel):
     source_url: str | None = None
     source_type: SourceTypeEnum
     raw_content: str
+    low_sodium_mode: bool = False
+    user_id: Optional[str] = None
 
 class RecipeSourceInfo(BaseModel):
     model_config = ConfigDict(from_attributes=True)

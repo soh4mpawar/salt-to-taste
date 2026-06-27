@@ -37,3 +37,9 @@ class RecipePipelineState(TypedDict):
     # Pipeline metadata
     errors: Annotated[list[str], operator.add]
     pipeline_stage: str               # tracks current stage for debugging
+
+    low_sodium_mode: Optional[bool]        # from user profile
+    low_sodium_warning: Optional[str]      # populated by personalization node
+    herb_suggestions: Optional[list[str]]  # populated if low_sodium_mode active
+    user_sodium_limit_mg: Optional[int]    # user's personal limit, None = use AHA default
+    sodium_limit_source: Optional[str]     # "user_custom" or "aha_default"
