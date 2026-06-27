@@ -34,26 +34,26 @@ export function SaltySwapSheet({ isOpen, onClose, recipeId, recommendationId }: 
               placeholder="e.g. Soy Sauce, Parmesan, Miso" 
               value={ingredient} 
               onChange={e => setIngredient(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-salt-200"
+              className="w-full px-4 py-3 rounded-xl border border-salt-200 placeholder:text-gray-700"
             />
-            <div className="flex gap-2">
+            <div className="flex gap-2 text-gray-900">
               <input 
                 type="number" 
                 placeholder="Amount" 
                 value={amount} 
                 onChange={e => setAmount(e.target.value)}
-                className="w-1/2 px-4 py-3 rounded-xl border border-salt-200"
+                className="w-1/2 px-4 py-3 rounded-xl border border-salt-200 placeholder:text-gray-700"
               />
               <select 
                 value={unit} 
                 onChange={e => setUnit(e.target.value)}
-                className="w-1/2 px-4 py-3 rounded-xl border border-salt-200 bg-white"
+                className="w-1/2 px-4 py-3 rounded-xl border border-salt-200 bg-white text-gray-900 placeholder:text-gray-500"
               >
-                <option value="g">Grams (g)</option>
-                <option value="ml">mL</option>
-                <option value="tsp">Teaspoons (tsp)</option>
-                <option value="tbsp">Tablespoons (tbsp)</option>
-                <option value="cup">Cups</option>
+                <option className="text-gray-900 bg-white" value="g">Grams (g)</option>
+                <option className="text-gray-900 bg-white" value="ml">mL</option>
+                <option className="text-gray-900 bg-white" value="tsp">Teaspoons (tsp)</option>
+                <option className="text-gray-900 bg-white" value="tbsp">Tablespoons (tbsp)</option>
+                <option className="text-gray-900 bg-white" value="cup">Cups</option>
               </select>
             </div>
             <button 

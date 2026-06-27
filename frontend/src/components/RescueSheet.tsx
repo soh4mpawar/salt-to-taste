@@ -22,9 +22,9 @@ export function RescueSheet({ isOpen, onClose, recommendationId }: { isOpen: boo
 
   return (
     <BottomSheet isOpen={isOpen} onClose={onClose} title="Rescue Protocol">
-      {!mutation.data ? (
+      {!rescueResult ? (
         <div className="flex flex-col gap-4">
-          <p className="text-sm text-salt-700">
+          <p className="text-sm text-gray-600">
             Oh no! Over-salted your dish? Tell us how much salt you accidentally put in, and we’ll give you culinary strategies to fix it.
           </p>
           <div className="flex flex-col gap-2 mt-4">
@@ -51,20 +51,20 @@ export function RescueSheet({ isOpen, onClose, recommendationId }: { isOpen: boo
           <div className="p-4 rounded-xl border bg-salt-50 flex flex-col gap-2">
              <div className="flex justify-between items-start">
                <span className="font-bold text-salt-900">Severity</span>
-               <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${getSeverityColor(mutation.data.severity)}`}>
-                 {mutation.data.severity}
+               <span className={`px-2 py-1 rounded-full text-xs font-bold uppercase ${getSeverityColor(rescueResult.severity)}`}>
+                 {rescueResult.severity}
                </span>
              </div>
-             <p className="text-sm text-salt-700 font-medium">Excess salt: {mutation.data.excess_salt_grams.toFixed(1)}g</p>
+             <p className="text-sm text-salt-700 font-medium">Excess salt: {rescueResult.excess_salt_grams.toFixed(1)}g</p>
           </div>
           
           <div className="p-4 bg-danger-50 rounded-xl border border-danger-200">
              <p className="font-bold text-danger-700 mb-1">Primary Recommendation</p>
-             <p className="text-sm text-danger-900">{mutation.data.primary_recommendation}</p>
+             <p className="text-sm text-danger-900">{rescueResult.primary_recommendation}</p>
           </div>
           
           <div className="space-y-3 mt-2">
-             {mutation.data.strategies.map((strategy: any, i: number) => (
+             {rescueResult.strategies.map((strategy: any, i: number) => (
                 <div key={i} className="p-3 border border-salt-200 rounded-xl" style={{ borderLeftWidth: '4px', borderLeftColor: '#c5221f' }}>
                    <div className="flex justify-between items-center mb-1">
                       <span className="font-bold text-salt-900">{strategy.strategy}</span>
@@ -76,7 +76,7 @@ export function RescueSheet({ isOpen, onClose, recommendationId }: { isOpen: boo
              ))}
           </div>
           
-          <button onClick={() => { mutation.reset(); onClose(); }} className="w-full py-4 text-salt-700 font-bold bg-salt-100 rounded-xl mt-2 min-h-touch">
+          <button onClick={() => { setRescueResult(null); mutation.reset(); onClose(); }} className="w-full py-4 text-salt-700 font-bold bg-salt-100 rounded-xl mt-2 min-h-touch">
             Done
           </button>
         </div>
