@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     MAX_IMAGE_DIMENSION: int = 1568
     IMAGE_QUALITY: int = 85
     TESSERACT_CONFIDENCE_THRESHOLD: float = 60.0
+    MAX_UPLOAD_SIZE_MB: int = 10
     
     model_config = SettingsConfigDict(env_file=env_file_path, env_file_encoding="utf-8", extra="ignore")
 

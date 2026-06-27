@@ -8,10 +8,17 @@ from app.schemas.recommendation import RecommendationRead
 from app.utils.image_processing import validate_image_format
 from app.services.recipe_service import process_recipe
 from app.models.user import User
+from app.core.config import settings
 
 router = APIRouter()
 
-@router.post("", response_model=RecommendationRead, status_code=201)
+@router.post(
+    "",
+    status_code=201,
+    summary="Submit a recipe from text or URL",
+    description="Runs the full LangGraph pipeline: parsing → culinary analysis → personalization.",
+    response_model=RecommendationRead
+)
 async def create_recipe(recipe_in: RecipeCreate, db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(User).limit(1))
     user = result.scalars().first()
@@ -28,7 +35,13 @@ async def create_recipe(recipe_in: RecipeCreate, db: AsyncSession = Depends(get_
         db=db
     )
 
-@router.post("/image-upload", response_model=RecipeImageUploadResponse, status_code=201)
+@router.post(
+    "/image-upload",
+    status_code=201,
+    summary="Submit a recipe from a cookbook image or photo",
+    description="Accepts JPEG, PNG, WEBP, or PDF (first page only). Automatically selects Tesseract or vision LLM based on image quality.",
+    response_model=RecipeImageUploadResponse
+)
 async def upload_recipe_image(
     file: UploadFile = File(...),
     user_id: str = Form(...),
@@ -36,8 +49,8 @@ async def upload_recipe_image(
 ):
     image_bytes = await file.read()
     
-    if len(image_bytes) > 10 * 1024 * 1024:
-        raise HTTPException(status_code=413, detail="File too large (max 10MB)")
+    if len(image_bytes) > settings.MAX_UPLOAD_SIZE_MB * 1024 * 1024:
+        raise HTTPException(status_code=413, detail=f"File too large (max {settings.MAX_UPLOAD_SIZE_MB}MB)")
         
     valid, reason = validate_image_format(image_bytes, file.filename)
     if not valid:

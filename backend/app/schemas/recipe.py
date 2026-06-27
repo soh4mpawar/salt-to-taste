@@ -1,6 +1,6 @@
 from uuid import UUID
 from datetime import datetime
-from typing import Any
+from typing import Any, Optional
 from pydantic import BaseModel, ConfigDict
 from app.models.recipe import SourceTypeEnum
 from app.schemas.recommendation import RecommendationRead
@@ -12,6 +12,13 @@ class RecipeCreate(BaseModel):
     source_type: SourceTypeEnum
     raw_content: str
 
+class RecipeSourceInfo(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    source_type: str
+    extraction_method: Optional[str]
+    ocr_confidence: Optional[str]
+    parsing_warnings: Optional[list[str]]
+
 class RecipeRead(BaseModel):
     model_config = ConfigDict(from_attributes=True)
     id: UUID
@@ -21,6 +28,7 @@ class RecipeRead(BaseModel):
     source_type: SourceTypeEnum
     raw_content: str
     parsed_json: dict[str, Any] | None = None
+    source_info: Optional[RecipeSourceInfo] = None
     total_mass_grams: float | None = None
     servings: int | None = None
     created_at: datetime
