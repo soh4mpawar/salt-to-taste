@@ -10,13 +10,25 @@ import { ScalingSlider } from "@/components/ScalingSlider";
 import { SaltySwapSheet } from "@/components/SaltySwapSheet";
 import { RescueSheet } from "@/components/RescueSheet";
 
+function RescueSheetController({ isOpen, onClose, recommendationId }: { isOpen: boolean, onClose: () => void, recommendationId: string }) {
+  const [rescueResult, setRescueResult] = useState<any>(null);
+  return (
+    <RescueSheet
+      isOpen={isOpen}
+      onClose={() => { setRescueResult(null); onClose(); }}
+      recommendationId={recommendationId}
+      rescueResult={rescueResult}
+      setRescueResult={setRescueResult}
+    />
+  );
+}
+
 export function RecommendationCard() {
   const { currentRecommendation: recommendation, reset } = useRecipeStore();
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [showScaling, setShowScaling] = useState(false);
   const [showSwap, setShowSwap] = useState(false);
   const [showRescue, setShowRescue] = useState(false);
-  const [rescueResult, setRescueResult] = useState<any>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -178,12 +190,10 @@ export function RecommendationCard() {
         recipeId={recommendation.recipe_id} 
         recommendationId={recommendation.id} 
       />
-      <RescueSheet 
-        isOpen={showRescue} 
-        onClose={() => { setShowRescue(false); setRescueResult(null); }} 
-        recommendationId={recommendation.id} 
-        rescueResult={rescueResult}
-        setRescueResult={setRescueResult}
+      <RescueSheetController
+        isOpen={showRescue}
+        onClose={() => setShowRescue(false)}
+        recommendationId={recommendation.id}
       />
     </div>
   );
