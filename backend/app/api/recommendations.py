@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-from app.schemas.recommendation import SaltySwapRequest, SaltySwapResponse
+from app.schemas.recommendation import SaltySwapRequest, SaltySwapResponse, RescueResult
 from app.core.database import get_db
 from app.services.swap_service import process_salty_swap
 from app.services.rescue_service import get_rescue_strategies
@@ -28,7 +28,7 @@ async def salty_swap(
     )
     return result
 
-@router.post("/rescue")
+@router.post("/rescue", response_model=RescueResult)
 async def rescue_protocol(
     recommendation_id: str,
     actual_grams_added: float,

@@ -35,3 +35,20 @@ class SaltySwapResponse(BaseModel):
     adjustment_applied: bool
     recommendation: str
     warning: str | None = None
+
+class RescueStrategy(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    strategy: str
+    action: str
+    detail: str
+    effectiveness: str
+    scales_with: str | None = None
+
+class RescueResult(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    severity: str
+    dish_type: str | None = None
+    excess_salt_grams: float | None = None
+    strategies: list[RescueStrategy] | None = None
+    primary_recommendation: str | None = None
+    message: str | None = None

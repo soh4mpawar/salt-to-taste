@@ -26,7 +26,7 @@ export function getSeverityColor(severity: string): string {
     case "mild": return "text-yellow-600 bg-yellow-50";
     case "moderate": return "text-orange-600 bg-orange-50";
     case "severe": return "text-red-600 bg-red-50";
-    default: return "text-green-600 bg-green-50";
+    default: return "bg-green-100 text-green-800";
   }
 }
 

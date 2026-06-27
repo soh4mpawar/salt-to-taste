@@ -16,6 +16,7 @@ export function RecommendationCard() {
   const [showScaling, setShowScaling] = useState(false);
   const [showSwap, setShowSwap] = useState(false);
   const [showRescue, setShowRescue] = useState(false);
+  const [rescueResult, setRescueResult] = useState<any>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -179,8 +180,10 @@ export function RecommendationCard() {
       />
       <RescueSheet 
         isOpen={showRescue} 
-        onClose={() => setShowRescue(false)} 
+        onClose={() => { setShowRescue(false); setRescueResult(null); }} 
         recommendationId={recommendation.id} 
+        rescueResult={rescueResult}
+        setRescueResult={setRescueResult}
       />
     </div>
   );
