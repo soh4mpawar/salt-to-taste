@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "salt-to-taste-backend"
+version = "0.1.0"
+description = ""
+authors = ["Author <author@example.com>"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = {extras = ["asyncio"], version = "*"}
+asyncpg = "*"
+alembic = "*"
+pydantic = {extras = ["email"], version = "*"}
+pydantic-settings = "*"
+python-dotenv = "*"
+httpx = "*"
+langgraph = "^1.2.6"
+langchain-community = "^0.4.2"
+langchain-ollama = "^1.1.0"
+vowpalwabbit = "^9.11.2"
+beautifulsoup4 = "^4.15.0"
+lxml = "^6.1.1"
+pillow = "^12.2.0"
+pytesseract = "^0.3.13"
+pdf2image = "^1.17.0"
+python-multipart = "^0.0.32"
+reportlab = "^5.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+httpx = "^0.28.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
