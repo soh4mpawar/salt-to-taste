@@ -14,10 +14,8 @@ export function BottomSheet({ isOpen, onClose, title, children }: {
     return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  if (!isOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50">
+    <div className={`fixed inset-0 z-50 transition-all duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none invisible'}`}>
       <div className="absolute inset-0 bg-black/40" onClick={onClose} />
       <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-3xl p-6">
         <div className="flex justify-between items-center mb-4">

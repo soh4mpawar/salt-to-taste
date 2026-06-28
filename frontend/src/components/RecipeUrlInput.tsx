@@ -11,6 +11,7 @@ export function RecipeUrlInput() {
   const { setCurrentRecommendation, lowSodiumMode } = useRecipeStore();
 
   const mutation = useMutation({
+    mutationKey: ['submitRecipe'],
     mutationFn: () => api.submitRecipe({
       title: "Imported Recipe",
       source_type: "url",

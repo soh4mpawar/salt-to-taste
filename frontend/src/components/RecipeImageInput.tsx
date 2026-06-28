@@ -13,6 +13,7 @@ export function RecipeImageInput() {
   const { setCurrentRecommendation } = useRecipeStore();
 
   const mutation = useMutation({
+    mutationKey: ['submitRecipe'],
     mutationFn: () => {
       if (!file) throw new Error("No file selected");
       return api.uploadRecipeImage(file, DEFAULT_USER_ID);

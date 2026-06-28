@@ -103,6 +103,8 @@ async def parsing_agent_node(state: RecipePipelineState) -> dict:
         }
     except Exception as e:
         error_msg = str(e)
+        if 'timeout' in error_msg.lower() or 'connection' in error_msg.lower():
+            error_msg = 'LLM timed out — Ollama may be loading the model. Please try again in 30 seconds.'
         return {
             "parsing_error": error_msg, 
             "pipeline_stage": "parsing_failed", 

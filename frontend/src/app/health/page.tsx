@@ -54,8 +54,8 @@ export default function HealthPage() {
 
   const barColor = percentUsed < 50 ? "bg-green-500" : percentUsed < 75 ? "bg-yellow-500" : "bg-red-500";
   
-  // Find max day for relative scaling of the weekly chart
-  const maxWeekly = Math.max(...weekly.map((d: any) => d.total_mg ?? 0), 1); // min 1 to avoid divide by zero
+  // Find max value for relative scaling of the weekly chart (include limit so line stays in bounds)
+  const maxWeekly = Math.max(limitMg, ...weekly.map((d: any) => d.total_mg ?? 0), 1);
 
   return (
     <main className="max-w-[500px] w-full mx-auto p-4 flex flex-col gap-6 bg-white min-h-screen">
@@ -93,23 +93,29 @@ export default function HealthPage() {
       {/* Weekly Chart */}
       <section>
          <h3 className="font-semibold text-salt-900 mb-4">Weekly Summary</h3>
-         <div className="flex items-end justify-between h-40 bg-white border-b border-salt-200 pb-2 gap-2 relative">
-            {/* Limit Line */}
-            <div className="absolute w-full border-t-2 border-dashed border-salt-300" style={{ bottom: `${(limitMg / maxWeekly) * 100}%` }} />
-            {(weekly ?? []).map((day: any) => {
-               const dayPct = (day.total_mg / maxWeekly) * 100;
-               const isOver = day.total_mg > limitMg;
-               return (
-                  <div key={day.date} className="flex flex-col items-center flex-1 gap-2 z-10 group relative">
-                  <div className="w-full max-w-[32px] rounded-t-sm" style={{ height: `${Math.max(4, Math.min(100, ((day.total_mg ?? 0) / maxWeekly) * 100))}%`, backgroundColor: day.within_limit ? "#34a853" : "#ea4335" }} />
-                     <span className="text-[10px] text-salt-500 font-medium uppercase" suppressHydrationWarning>{new Date(day.date).toLocaleDateString('en-US', {weekday: 'short'})}</span>
-                     
-                     <div className="absolute -top-8 bg-salt-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                        {day.total_mg.toFixed(0)} mg
+         <div className="flex flex-col h-40 bg-white border-b border-salt-200 relative">
+            {/* The Graph Area (with Limit Line) */}
+            <div className="flex-1 flex items-end justify-between gap-2 relative">
+               <div className="absolute w-full border-t-2 border-dashed border-salt-300 z-0" style={{ bottom: `${(limitMg / maxWeekly) * 100}%` }} />
+               {(weekly ?? []).map((day: any) => {
+                  return (
+                     <div key={day.date} className="flex-1 flex justify-center h-full items-end group relative z-10">
+                        <div className="w-full max-w-[32px] rounded-t-sm transition-all" style={{ height: `${Math.max(4, Math.min(100, ((day.total_mg ?? 0) / maxWeekly) * 100))}%`, backgroundColor: day.within_limit ? "#34a853" : "#ea4335" }} />
+                        <div className="absolute -top-8 bg-salt-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                           {day.total_mg.toFixed(0)} mg
+                        </div>
                      </div>
+                  );
+               })}
+            </div>
+            {/* The X-Axis Labels */}
+            <div className="flex justify-between gap-2 pt-2 pb-1">
+               {(weekly ?? []).map((day: any) => (
+                  <div key={day.date} className="flex-1 text-center">
+                     <span className="text-[10px] text-salt-500 font-medium uppercase shrink-0" suppressHydrationWarning>{new Date(day.date).toLocaleDateString('en-US', {weekday: 'short'})}</span>
                   </div>
-               );
-            })}
+               ))}
+            </div>
          </div>
 
          {/* Weekly stats row */}

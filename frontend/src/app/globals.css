@@ -14,20 +14,46 @@
   --color-salt-50: #f8f9fa;
   --color-salt-100: #f1f3f4;
   --color-salt-200: #e8eaed;
+  --color-salt-300: #dadce0;
+  --color-salt-400: #bdc1c6;
   --color-salt-500: #9aa0a6;
+  --color-salt-600: #80868b;
+  --color-salt-700: #5f6368;
+  --color-salt-800: #3c4043;
   --color-salt-900: #202124;
 
   --color-umami-50: #fff8f1;
   --color-umami-100: #ffe8cc;
+  --color-umami-200: #ffc999;
+  --color-umami-300: #ffa666;
   --color-umami-400: #ff9500;
   --color-umami-500: #e6851a;
   --color-umami-600: #cc6600;
+  --color-umami-700: #b35900;
+  --color-umami-800: #804000;
+  --color-umami-900: #4d2600;
 
+  --color-fresh-50: #e6f4ea;
+  --color-fresh-100: #ceead6;
+  --color-fresh-200: #a8dab5;
+  --color-fresh-300: #81c995;
   --color-fresh-400: #34a853;
   --color-fresh-500: #1e8e3e;
+  --color-fresh-600: #188038;
+  --color-fresh-700: #137333;
+  --color-fresh-800: #0d652d;
+  --color-fresh-900: #0b5525;
 
+  --color-danger-50: #fce8e6;
+  --color-danger-100: #fad2cf;
+  --color-danger-200: #f6aea9;
+  --color-danger-300: #f28b82;
   --color-danger-400: #ea4335;
   --color-danger-500: #c5221f;
+  --color-danger-600: #b31412;
+  --color-danger-700: #a50e0e;
+  --color-danger-800: #891111;
+  --color-danger-900: #680b0b;
 
   --font-display: var(--font-display), system-ui, sans-serif;
   

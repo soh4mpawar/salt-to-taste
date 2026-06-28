@@ -12,6 +12,7 @@ export function RecipeTextInput() {
   const { setCurrentRecommendation, lowSodiumMode } = useRecipeStore();
 
   const mutation = useMutation({
+    mutationKey: ['submitRecipe'],
     mutationFn: () => api.submitRecipe({
       title: title || "Untitled Recipe",
       source_type: "text",

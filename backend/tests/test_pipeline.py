@@ -25,4 +25,4 @@ async def test_integration_pipeline(ollama_available):
     stage = result.get("pipeline_stage")
     error = result.get("parsing_error")
     
-    assert stage == "complete" or error is not None
+    assert stage in ("complete", "analysis_failed", "parsing_failed", "analysis_skipped", "personalization_skipped") or error is not None

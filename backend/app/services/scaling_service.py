@@ -37,7 +37,7 @@ def scale_ingredients(ingredients: list[dict], original_servings: int, target_se
     import copy
     for ing in ingredients:
         ing_copy = copy.deepcopy(ing)
-        amount = float(ing_copy.get("amount", 0.0))
+        amount = float(ing_copy.get("amount") or 0.0)
         ing_copy["amount"] = amount * ratio
         scaled.append(ing_copy)
     return scaled

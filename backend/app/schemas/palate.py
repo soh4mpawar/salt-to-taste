@@ -10,3 +10,4 @@ class PalateHistoryItem(BaseModel):
     baseline_grams: float
     personalized_grams: float
     recommendation_context: Optional[dict] = None
+    recipe_title: Optional[str] = None

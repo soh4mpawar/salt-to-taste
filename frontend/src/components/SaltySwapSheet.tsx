@@ -34,7 +34,7 @@ export function SaltySwapSheet({ isOpen, onClose, recipeId, recommendationId }: 
               placeholder="e.g. Soy Sauce, Parmesan, Miso" 
               value={ingredient} 
               onChange={e => setIngredient(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-salt-200 placeholder:text-gray-700"
+              className="w-full px-4 py-3 rounded-xl border border-salt-200 text-gray-900 placeholder:text-gray-700"
             />
             <div className="flex gap-2 text-gray-900">
               <input 

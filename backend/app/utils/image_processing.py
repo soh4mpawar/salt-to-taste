@@ -6,9 +6,20 @@ from app.core.config import settings
 
 def detect_image_orientation(image_bytes: bytes) -> bytes:
     img = Image.open(io.BytesIO(image_bytes))
+    orig_format = img.format
     img = ImageOps.exif_transpose(img)
     out_buffer = io.BytesIO()
-    img.save(out_buffer, format=img.format or "JPEG")
+    
+    save_format = orig_format or "JPEG"
+    if save_format == "JPEG":
+        if img.mode == 'RGBA':
+            background = Image.new('RGB', img.size, (255, 255, 255))
+            background.paste(img, mask=img.split()[3])
+            img = background
+        elif img.mode not in ('RGB', 'L'):
+            img = img.convert('RGB')
+            
+    img.save(out_buffer, format=save_format)
     return out_buffer.getvalue()
 
 def enhance_for_ocr(image_bytes: bytes) -> bytes:
@@ -69,7 +80,11 @@ def preprocess_image(file_bytes: bytes, filename: str) -> tuple[bytes, dict]:
         img = Image.open(io.BytesIO(oriented_bytes))
         metadata["format"] = "image"
         
-    if img.mode != 'RGB':
+    if img.mode == 'RGBA':
+        background = Image.new('RGB', img.size, (255, 255, 255))
+        background.paste(img, mask=img.split()[3])
+        img = background
+    elif img.mode not in ('RGB', 'L'):
         img = img.convert('RGB')
         
     max_dim = settings.MAX_IMAGE_DIMENSION

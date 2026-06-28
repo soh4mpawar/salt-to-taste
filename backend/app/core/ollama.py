@@ -6,14 +6,16 @@ def get_parsing_llm() -> ChatOllama:
         base_url=settings.OLLAMA_BASE_URL,
         model=settings.PARSING_MODEL,
         temperature=0.1,
-        format="json"
+        format="json",
+        timeout=120,
     )
 
 def get_analysis_llm() -> ChatOllama:
     return ChatOllama(
         base_url=settings.OLLAMA_BASE_URL,
         model=settings.ANALYSIS_MODEL,
-        temperature=0.1
+        temperature=0.1,
+        timeout=120,
     )
 
 def get_vision_llm() -> ChatOllama:
@@ -21,5 +23,6 @@ def get_vision_llm() -> ChatOllama:
         base_url=settings.OLLAMA_BASE_URL,
         model=settings.VISION_MODEL,
         temperature=0.1,
-        format="json"
+        format="json",
+        timeout=120,
     )

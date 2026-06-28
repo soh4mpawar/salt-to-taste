@@ -43,9 +43,11 @@ async def get_palate_history(user_id: str, db: AsyncSession = Depends(get_db)):
     query = text("""
         SELECT uf.rating, uf.notes, uf.created_at,
                rsr.baseline_grams, rsr.personalized_grams,
-               rsr.recommendation_context
+               rsr.recommendation_context,
+               r.title as recipe_title
         FROM user_feedback uf
         JOIN recipe_salt_recommendations rsr ON uf.recommendation_id = rsr.id
+        JOIN recipes r ON rsr.recipe_id = r.id
         WHERE rsr.user_id = :user_id
         ORDER BY uf.created_at DESC
         LIMIT 20

@@ -7,9 +7,9 @@ def calculate_ingredient_breakdown(ingredients: list[dict]) -> dict:
     highest_name = None
     
     for ing in ingredients:
-        name = ing.get("name", "").lower()
-        amount = ing.get("amount", 0.0)
-        unit = ing.get("unit", "").lower()
+        name = str(ing.get("name") or "").lower()
+        amount = float(ing.get("amount") or 0.0)
+        unit = str(ing.get("unit") or "").lower()
         is_salty = ing.get("is_salty", False)
         
         sodium_mg = 0.0

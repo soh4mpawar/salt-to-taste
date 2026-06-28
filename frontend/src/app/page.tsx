@@ -12,7 +12,7 @@ import { useIsMutating } from "@tanstack/react-query";
 
 export default function Home() {
   const { inputMode, currentRecommendation, lowSodiumMode } = useRecipeStore();
-  const isMutating = useIsMutating();
+  const isMutating = useIsMutating({ mutationKey: ['submitRecipe'] });
 
   return (
     <main className="max-w-[500px] w-full mx-auto p-4 flex flex-col gap-6 bg-white min-h-screen">

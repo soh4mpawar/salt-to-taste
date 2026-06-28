@@ -100,7 +100,7 @@ export default function HistoryPage() {
                   {emoji}
                 </div>
                 <div className="flex-1">
-                  <p className="font-semibold text-salt-900">{entry.recipe?.title || entry.recommendation_context?.dish_type || "Dish"}</p>
+                  <p className="font-semibold text-salt-900">{entry.recipe_title || entry.recommendation_context?.dish_type || "Dish"}</p>
                   <p className="text-xs text-salt-700 mt-0.5" suppressHydrationWarning>{formatDate(dateStr)}</p>
 
                   <div className="mt-2 text-sm flex items-center justify-between">

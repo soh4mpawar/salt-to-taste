@@ -59,9 +59,9 @@ def calculate_hidden_sodium(ingredients: list) -> tuple[float, list]:
     detected_sources = []
     
     for ing in ingredients:
-        name = ing.get("name", "").lower()
-        amount = float(ing.get("amount", 0))
-        unit = ing.get("unit", "").lower()
+        name = str(ing.get("name") or "").lower()
+        amount = float(ing.get("amount") or 0.0)
+        unit = str(ing.get("unit") or "").lower()
         
         grams = amount * UNIT_TO_GRAMS.get(unit, 1.0)
         

@@ -1,0 +1,23 @@
+{
+    "id":  "19ee23ae-8964-41fc-8e20-b69e69ce3815",
+    "recipe_id":  "879214cb-4725-4236-b51c-c98c4810370d",
+    "user_id":  "14cc53c8-c2be-44c3-abeb-b175d6859d25",
+    "salt_type_id":  1,
+    "salt_type_name":  "Diamond Crystal Kosher",
+    "baseline_grams":  7.65,
+    "personalized_grams":  7.65,
+    "sodium_mg_per_serving":  751.6,
+    "recommendation_context":  {
+                                   "dish_type":  "other",
+                                   "chosen_action":  2,
+                                   "cooking_method":  "fry",
+                                   "feedback_count":  0,
+                                   "hidden_sodium_mg":  0.0,
+                                   "adjustment_multiplier":  1.0
+                               },
+    "created_at":  "2026-06-28T05:16:05.492536Z",
+    "low_sodium_warning":  "This serving contains 752.0mg sodium (50.1% of daily limit)",
+    "herb_suggestions":  [
+
+                         ]
+}

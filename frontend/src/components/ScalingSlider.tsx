@@ -86,7 +86,7 @@ export function ScalingSlider({ recipeId, originalServings }: {
                 {data.scaled_ingredients.map((ing, i) => (
                   <li key={i} className="flex justify-between py-1 border-b border-salt-100">
                     <span className="text-salt-700">{ing.name}</span>
-                    <span className="font-medium">{ing.amount} {ing.unit}</span>
+                    <span className="font-medium text-salt-900">{ing.amount} {ing.unit}</span>
                   </li>
                 ))}
               </ul>
